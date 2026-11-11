@@ -118,15 +118,15 @@ struct HomeView: View {
 
     private var currentQuestionSetArea: some View {
         VStack(spacing: 14) {
-            Text("Today's Adventure")
+            Text(viewModel.currentQuestionSet.setName)
                 .font(.headline)
                 .foregroundStyle(.secondary)
 
-            Text(viewModel.currentQuestionSetSubject)
+            Text(viewModel.currentQuestionSet.subject.rawValue)
                 .font(.largeTitle.bold())
                 .foregroundStyle(.blue)
 
-            Text("\(viewModel.currentQuestionSetQuestionCount) questions")
+            Text("\(viewModel.currentQuestionSet.questions.count) questions")
                 .font(.title3)
 
             Button {

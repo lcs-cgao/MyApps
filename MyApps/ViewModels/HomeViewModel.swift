@@ -9,10 +9,12 @@ import Observation
 final class HomeViewModel {
     var character = Character()
     var trophyCount = 0
+    private(set) var currentQuestionSetIndex = 0
+    private(set) var questionSetProgression = QuestionSet.questionSetProgression
 
-    // Sample values until the question set system is connected.
-    let currentQuestionSetSubject = "Math"
-    let currentQuestionSetQuestionCount = 10
+    var currentQuestionSet: QuestionSet {
+        questionSetProgression[currentQuestionSetIndex]
+    }
 
     func updateCharacter(_ character: Character) {
         self.character = character
@@ -20,5 +22,17 @@ final class HomeViewModel {
 
     func awardTrophy() {
         trophyCount += 1
+    }
+
+    func completeCurrentQuestionSet() {
+        guard currentQuestionSet.isCompleted == false else {
+            return
+        }
+
+        questionSetProgression[currentQuestionSetIndex].isCompleted = true
+
+        if currentQuestionSetIndex < questionSetProgression.count - 1 {
+            currentQuestionSetIndex += 1
+        }
     }
 }

@@ -49,6 +49,37 @@ struct QuestionSet: Identifiable {
         frenchSampleSet
     ]
 
+    static let questionSetProgression: [QuestionSet] = [
+        mathematicsSampleSet,
+        scienceSampleSet,
+        historySampleSet,
+        frenchSampleSet,
+        QuestionSet(
+            setName: "Mathematics Set 2",
+            subject: .mathematics,
+            difficulty: .normal,
+            questions: mathematicsSampleSet.questions
+        ),
+        QuestionSet(
+            setName: "Science Set 2",
+            subject: .science,
+            difficulty: .normal,
+            questions: scienceSampleSet.questions
+        ),
+        QuestionSet(
+            setName: "History Set 2",
+            subject: .history,
+            difficulty: .normal,
+            questions: historySampleSet.questions
+        ),
+        QuestionSet(
+            setName: "French Set 2",
+            subject: .french,
+            difficulty: .normal,
+            questions: frenchSampleSet.questions
+        )
+    ]
+
     private static let mathematicsSampleSet = QuestionSet(
         setName: "Math Explorers",
         subject: .mathematics,
