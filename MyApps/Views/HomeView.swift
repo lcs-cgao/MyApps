@@ -6,11 +6,16 @@
 import SwiftUI
 
 struct HomeView: View {
+    private enum Destination: Hashable {
+        case quiz(UUID)
+    }
+
     @State private var viewModel = HomeViewModel()
     @State private var isShowingSettings = false
+    @State private var navigationPath: [Destination] = []
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ScrollView {
                 VStack(spacing: 20) {
                     topArea
@@ -27,6 +32,23 @@ struct HomeView: View {
                 }
             } message: {
                 Text("Settings will be available soon!")
+            }
+            .navigationDestination(for: Destination.self) { destination in
+                switch destination {
+                case .quiz(let questionSetID):
+                    if let questionSet = viewModel.questionSet(withID: questionSetID) {
+                        QuizView(
+                            questionSet: questionSet,
+                            historyViewModel: viewModel.historyViewModel,
+                            onCompleted: {
+                                viewModel.completeCurrentQuestionSet()
+                            },
+                            onReturnToMainMenu: {
+                                navigationPath.removeAll()
+                            }
+                        )
+                    }
+                }
             }
         }
     }
@@ -53,7 +75,9 @@ struct HomeView: View {
                     .font(.headline)
                     .foregroundStyle(.orange)
 
-                NavigationLink(destination: HistoryView()) {
+                NavigationLink {
+                    HistoryView(viewModel: viewModel.historyViewModel)
+                } label: {
                     Label("History", systemImage: "clock.arrow.circlepath")
                         .labelStyle(.iconOnly)
                         .font(.title2)
@@ -130,7 +154,7 @@ struct HomeView: View {
                 .font(.title3)
 
             Button {
-                // The quiz system will be connected in a later step.
+                navigationPath.append(.quiz(viewModel.currentQuestionSet.id))
             } label: {
                 Label("Start Adventure", systemImage: "star.fill")
                     .font(.headline)
