@@ -87,9 +87,6 @@ struct CharacterView: View {
         }
         .background(Color.yellow.opacity(0.15))
         .navigationTitle("Create Your Character")
-        .onChange(of: viewModel.character) { _, newCharacter in
-            onContinue(newCharacter)
-        }
     }
 
     private var characterPreview: some View {

@@ -13,9 +13,15 @@ struct HomeView: View {
         case shop
     }
 
-    @State private var viewModel = HomeViewModel()
+    @State private var viewModel: HomeViewModel
     @State private var isShowingSettings = false
     @State private var navigationPath: [Destination] = []
+
+    init(initialCharacter: Character? = nil) {
+        _viewModel = State(
+            initialValue: HomeViewModel(initialCharacter: initialCharacter)
+        )
+    }
 
     var body: some View {
         NavigationStack(path: $navigationPath) {

@@ -16,13 +16,17 @@ final class HomeViewModel {
     private(set) var questionSetProgression: [QuestionSet]
     private(set) var awardedQuestionSetNames: [String]
 
-    init(dataStore: LocalDataStore = .shared) {
+    init(
+        dataStore: LocalDataStore = .shared,
+        initialCharacter: Character? = nil
+    ) {
         self.dataStore = dataStore
         let savedProgress = dataStore.loadProgress()
+        let characterToRestore = initialCharacter ?? savedProgress.character
 
         let savedShopViewModel = ShopViewModel(
             initialTrophyBalance: savedProgress.trophyCount,
-            initialCharacter: savedProgress.character,
+            initialCharacter: characterToRestore,
             purchasedItemNames: savedProgress.purchasedItemNames,
             equippedItemNames: savedProgress.equippedItemNames
         )
@@ -56,6 +60,10 @@ final class HomeViewModel {
         }
         historyViewModel.onChange = { [weak self] in
             self?.saveProgress()
+        }
+
+        if initialCharacter != nil {
+            saveProgress()
         }
     }
 
