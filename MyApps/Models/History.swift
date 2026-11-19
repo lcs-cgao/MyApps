@@ -5,8 +5,8 @@
 
 import Foundation
 
-struct CompletedQuestionRecord: Identifiable {
-    let id = UUID()
+struct CompletedQuestionRecord: Identifiable, Codable {
+    var id = UUID()
     let questionText: String
     let selectedAnswer: String
     let correctAnswer: String
@@ -15,8 +15,8 @@ struct CompletedQuestionRecord: Identifiable {
     let completedDate: Date
 }
 
-struct IncorrectQuestionRecord: Identifiable {
-    let id = UUID()
+struct IncorrectQuestionRecord: Identifiable, Codable {
+    var id = UUID()
     let questionText: String
     let incorrectAnswer: String
     let correctAnswer: String

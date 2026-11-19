@@ -63,6 +63,9 @@ struct HistoryView: View {
                         Text(record.explanation)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
+                        Text(record.answeredDate.formatted(date: .abbreviated, time: .shortened))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                     .padding(.vertical, 4)
                 }

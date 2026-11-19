@@ -8,7 +8,7 @@ import Observation
 @Observable
 @MainActor
 final class CharacterViewModel {
-    var character = Character()
+    var character: Character
 
     let skinToneOptions = ["Light", "Medium", "Dark"]
     let eyeColorOptions = ["Blue", "Green", "Brown"]
@@ -16,6 +16,10 @@ final class CharacterViewModel {
     let hairColorOptions = ["Black", "Brown", "Blonde"]
     let outfitOptions = ["Casual", "Sporty", "Fancy"]
     let accessoryOptions = ["None", "Glasses", "Hat"]
+
+    init(character: Character = Character()) {
+        self.character = character
+    }
 
     func selectSkinTone(_ skinTone: String) {
         character.skinTone = skinTone

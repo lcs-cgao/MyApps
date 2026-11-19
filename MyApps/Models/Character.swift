@@ -5,8 +5,8 @@
 
 import Foundation
 
-struct Character: Identifiable {
-    let id: UUID = UUID()
+struct Character: Identifiable, Codable, Equatable {
+    var id: UUID = UUID()
     var skinTone: String = "Medium"
     var eyeColor: String = "Brown"
     var hairstyle: String = "Short"

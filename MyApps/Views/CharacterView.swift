@@ -6,11 +6,16 @@
 import SwiftUI
 
 struct CharacterView: View {
-    @State private var viewModel = CharacterViewModel()
+    @State private var viewModel: CharacterViewModel
+    @Environment(\.dismiss) private var dismiss
 
     let onContinue: (Character) -> Void
 
-    init(onContinue: @escaping (Character) -> Void = { _ in }) {
+    init(
+        initialCharacter: Character = Character(),
+        onContinue: @escaping (Character) -> Void = { _ in }
+    ) {
+        _viewModel = State(initialValue: CharacterViewModel(character: initialCharacter))
         self.onContinue = onContinue
     }
 
@@ -69,6 +74,7 @@ struct CharacterView: View {
 
                 Button("Continue") {
                     onContinue(viewModel.character)
+                    dismiss()
                 }
                 .font(.headline)
                 .foregroundStyle(.white)
@@ -81,6 +87,9 @@ struct CharacterView: View {
         }
         .background(Color.yellow.opacity(0.15))
         .navigationTitle("Create Your Character")
+        .onChange(of: viewModel.character) { _, newCharacter in
+            onContinue(newCharacter)
+        }
     }
 
     private var characterPreview: some View {

@@ -5,7 +5,7 @@
 
 import Foundation
 
-enum Subject: String, CaseIterable, Identifiable {
+enum Subject: String, CaseIterable, Identifiable, Codable {
     case mathematics = "Mathematics"
     case science = "Science"
     case history = "History"

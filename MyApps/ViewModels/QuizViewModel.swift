@@ -8,7 +8,8 @@ import Observation
 @Observable
 @MainActor
 final class QuizViewModel {
-    let questionSet: QuestionSet
+    private(set) var questionSet: QuestionSet
+    let alternativeQuestionSet: QuestionSet?
     let historyViewModel: HistoryViewModel
     private(set) var currentQuestionIndex = 0
     private(set) var selectedAnswer: String?
@@ -20,9 +21,11 @@ final class QuizViewModel {
 
     init(
         questionSet: QuestionSet,
+        alternativeQuestionSet: QuestionSet? = nil,
         historyViewModel: HistoryViewModel
     ) {
         self.questionSet = questionSet
+        self.alternativeQuestionSet = alternativeQuestionSet
         self.historyViewModel = historyViewModel
     }
 
@@ -90,6 +93,9 @@ final class QuizViewModel {
     }
 
     func resetQuizProgress() {
+        if let alternativeQuestionSet {
+            questionSet = alternativeQuestionSet
+        }
         currentQuestionIndex = 0
         isQuizComplete = false
         clearAnswerState()

@@ -5,7 +5,7 @@
 
 import Foundation
 
-enum ShopItemCategory: String {
+enum ShopItemCategory: String, Codable {
     case shirt = "Shirts"
     case hairstyle = "Hairstyles"
     case hat = "Hats"

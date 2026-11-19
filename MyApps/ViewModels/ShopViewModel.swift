@@ -16,6 +16,7 @@ final class ShopViewModel {
     private(set) var purchasedItemIDs: [UUID] = []
     private(set) var equippedItemIDs: [UUID] = []
     private(set) var purchaseMessage = ""
+    var onChange: () -> Void = {}
 
     // MARK: - Shop Items
 
@@ -33,9 +34,23 @@ final class ShopViewModel {
         ShopItem(name: "Necklace", trophyPrice: 5, category: .accessory, symbol: "📿")
     ]
 
-    init(initialTrophyBalance: Int, initialCharacter: Character) {
+    init(
+        initialTrophyBalance: Int,
+        initialCharacter: Character,
+        purchasedItemNames: [String] = [],
+        equippedItemNames: [String] = []
+    ) {
         trophyBalance = initialTrophyBalance
         character = initialCharacter
+
+        for item in availableItems {
+            if purchasedItemNames.contains(item.name) {
+                purchasedItemIDs.append(item.id)
+            }
+            if equippedItemNames.contains(item.name) {
+                equippedItemIDs.append(item.id)
+            }
+        }
     }
 
     // MARK: - Purchasing
@@ -54,6 +69,7 @@ final class ShopViewModel {
         trophyBalance -= item.trophyPrice
         purchasedItemIDs.append(item.id)
         purchaseMessage = "\(item.name) unlocked!"
+        onChange()
     }
 
     // MARK: - Equipping
@@ -89,6 +105,7 @@ final class ShopViewModel {
         }
 
         purchaseMessage = "\(item.name) equipped!"
+        onChange()
     }
 
     func isPurchased(_ item: ShopItem) -> Bool {
@@ -103,9 +120,31 @@ final class ShopViewModel {
 
     func updateCharacter(_ character: Character) {
         self.character = character
+        onChange()
     }
 
     func awardTrophy() {
         trophyBalance += 1
+        onChange()
+    }
+
+    var purchasedItemNames: [String] {
+        var names: [String] = []
+        for item in availableItems {
+            if purchasedItemIDs.contains(item.id) {
+                names.append(item.name)
+            }
+        }
+        return names
+    }
+
+    var equippedItemNames: [String] {
+        var names: [String] = []
+        for item in availableItems {
+            if equippedItemIDs.contains(item.id) {
+                names.append(item.name)
+            }
+        }
+        return names
     }
 }

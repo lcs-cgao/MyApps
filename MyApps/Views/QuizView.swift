@@ -14,6 +14,7 @@ struct QuizView: View {
 
     init(
         questionSet: QuestionSet,
+        alternativeQuestionSet: QuestionSet? = nil,
         historyViewModel: HistoryViewModel,
         onCompleted: @escaping () -> Void = {},
         onReturnToMainMenu: @escaping () -> Void = {}
@@ -21,6 +22,7 @@ struct QuizView: View {
         _viewModel = State(
             initialValue: QuizViewModel(
                 questionSet: questionSet,
+                alternativeQuestionSet: alternativeQuestionSet,
                 historyViewModel: historyViewModel
             )
         )
@@ -123,7 +125,7 @@ struct QuizView: View {
                             .multilineTextAlignment(.center)
                     }
 
-                    Button("Start Again") {
+                    Button("Try Different Questions") {
                         viewModel.resetQuizProgress()
                     }
                     .buttonStyle(.borderedProminent)

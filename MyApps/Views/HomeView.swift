@@ -42,6 +42,7 @@ struct HomeView: View {
                     if let questionSet = viewModel.questionSet(withID: questionSetID) {
                         QuizView(
                             questionSet: questionSet,
+                            alternativeQuestionSet: QuestionSet.retryQuestionSet(for: questionSet),
                             historyViewModel: viewModel.historyViewModel,
                             onCompleted: {
                                 viewModel.completeCurrentQuestionSet()
@@ -54,7 +55,7 @@ struct HomeView: View {
                 case .history:
                     HistoryView(viewModel: viewModel.historyViewModel)
                 case .character:
-                    CharacterView { selectedCharacter in
+                    CharacterView(initialCharacter: viewModel.character) { selectedCharacter in
                         viewModel.updateCharacter(selectedCharacter)
                     }
                 case .shop:
