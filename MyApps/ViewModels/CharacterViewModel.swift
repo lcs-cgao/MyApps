@@ -6,6 +6,7 @@
 import Observation
 
 @Observable
+@MainActor
 final class CharacterViewModel {
     var character = Character()
 

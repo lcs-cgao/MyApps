@@ -6,6 +6,7 @@
 import Observation
 
 @Observable
+@MainActor
 final class QuizViewModel {
     let questionSet: QuestionSet
     let historyViewModel: HistoryViewModel

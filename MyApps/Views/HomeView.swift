@@ -8,6 +8,9 @@ import SwiftUI
 struct HomeView: View {
     private enum Destination: Hashable {
         case quiz(UUID)
+        case history
+        case character
+        case shop
     }
 
     @State private var viewModel = HomeViewModel()
@@ -48,6 +51,14 @@ struct HomeView: View {
                             }
                         )
                     }
+                case .history:
+                    HistoryView(viewModel: viewModel.historyViewModel)
+                case .character:
+                    CharacterView { selectedCharacter in
+                        viewModel.updateCharacter(selectedCharacter)
+                    }
+                case .shop:
+                    ShopView(homeViewModel: viewModel)
                 }
             }
         }
@@ -75,9 +86,7 @@ struct HomeView: View {
                     .font(.headline)
                     .foregroundStyle(.orange)
 
-                NavigationLink {
-                    HistoryView(viewModel: viewModel.historyViewModel)
-                } label: {
+                NavigationLink(value: Destination.history) {
                     Label("History", systemImage: "clock.arrow.circlepath")
                         .labelStyle(.iconOnly)
                         .font(.title2)
@@ -129,6 +138,33 @@ struct HomeView: View {
                             .frame(width: 12, height: 12)
                     }
                 }
+
+                if viewModel.character.accessories == "Blue Hat"
+                    || viewModel.character.accessories == "Crown" {
+                    Text(hatSymbol)
+                        .font(.system(size: 38))
+                        .offset(y: -60)
+                }
+
+                if viewModel.character.accessories == "Round Glasses"
+                    || viewModel.character.accessories == "Sun Glasses"
+                    || viewModel.character.accessories == "Glasses" {
+                    Text("👓")
+                        .font(.system(size: 26))
+                        .offset(y: 14)
+                }
+
+                if viewModel.character.accessories == "Backpack" {
+                    Text("🎒")
+                        .font(.system(size: 28))
+                        .offset(x: 48, y: 42)
+                }
+
+                if viewModel.character.accessories == "Necklace" {
+                    Text("📿")
+                        .font(.system(size: 28))
+                        .offset(y: 40)
+                }
             }
 
             Text(outfitSymbol)
@@ -173,11 +209,7 @@ struct HomeView: View {
 
     private var bottomNavigationArea: some View {
         HStack(spacing: 16) {
-            NavigationLink {
-                CharacterView { selectedCharacter in
-                    viewModel.updateCharacter(selectedCharacter)
-                }
-            } label: {
+            NavigationLink(value: Destination.character) {
                 bottomNavigationButton(
                     title: "Character",
                     systemImage: "person.fill",
@@ -185,7 +217,7 @@ struct HomeView: View {
                 )
             }
 
-            NavigationLink(destination: ShopView()) {
+            NavigationLink(value: Destination.shop) {
                 bottomNavigationButton(
                     title: "Shop",
                     systemImage: "bag.fill",
@@ -232,24 +264,29 @@ struct HomeView: View {
     }
 
     private var hairSymbol: String {
-        switch viewModel.character.hairstyle {
-        case "Curly":
+        if viewModel.character.hairstyle.contains("Curly") {
             return "〰️"
-        case "Ponytail":
-            return "🎀"
-        default:
-            return "🧢"
         }
+        if viewModel.character.hairstyle.contains("Ponytail") {
+            return "🎀"
+        }
+        return "🧢"
     }
 
     private var outfitSymbol: String {
-        switch viewModel.character.outfit {
-        case "Sporty":
+        if viewModel.character.outfit.contains("Sporty") {
             return "⚽️"
-        case "Fancy":
-            return "👗"
-        default:
-            return "👕"
         }
+        if viewModel.character.outfit.contains("Fancy") {
+            return "👗"
+        }
+        return "👕"
+    }
+
+    private var hatSymbol: String {
+        if viewModel.character.accessories == "Crown" {
+            return "👑"
+        }
+        return "🧢"
     }
 }

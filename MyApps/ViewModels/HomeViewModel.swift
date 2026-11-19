@@ -7,12 +7,28 @@ import Foundation
 import Observation
 
 @Observable
+@MainActor
 final class HomeViewModel {
-    var character = Character()
-    var trophyCount = 0
+    let shopViewModel = ShopViewModel(
+        initialTrophyBalance: 0,
+        initialCharacter: Character()
+    )
     let historyViewModel = HistoryViewModel()
     private(set) var currentQuestionSetIndex = 0
     private(set) var questionSetProgression = QuestionSet.questionSetProgression
+
+    var character: Character {
+        get {
+            shopViewModel.character
+        }
+        set {
+            shopViewModel.character = newValue
+        }
+    }
+
+    var trophyCount: Int {
+        shopViewModel.trophyBalance
+    }
 
     var currentQuestionSet: QuestionSet {
         questionSetProgression[currentQuestionSetIndex]
@@ -25,11 +41,11 @@ final class HomeViewModel {
     }
 
     func updateCharacter(_ character: Character) {
-        self.character = character
+        shopViewModel.updateCharacter(character)
     }
 
     func awardTrophy() {
-        trophyCount += 1
+        shopViewModel.awardTrophy()
     }
 
     func completeCurrentQuestionSet() {
@@ -48,42 +64,43 @@ final class HomeViewModel {
 }
 
 @Observable
+@MainActor
 final class HistoryViewModel {
-        private(set) var completedQuestions: [CompletedQuestionRecord] = []
-        private(set) var incorrectQuestions: [IncorrectQuestionRecord] = []
+    private(set) var completedQuestions: [CompletedQuestionRecord] = []
+    private(set) var incorrectQuestions: [IncorrectQuestionRecord] = []
 
-        func recordCompletedQuestion(
-            question: Question,
-            selectedAnswer: String,
-            questionSetName: String
-        ) {
-            let record = CompletedQuestionRecord(
-                questionText: question.questionText,
-                selectedAnswer: selectedAnswer,
-                correctAnswer: question.correctAnswer,
-                questionSetName: questionSetName,
-                subject: question.subject,
-                completedDate: Date()
-            )
+    func recordCompletedQuestion(
+        question: Question,
+        selectedAnswer: String,
+        questionSetName: String
+    ) {
+        let record = CompletedQuestionRecord(
+            questionText: question.questionText,
+            selectedAnswer: selectedAnswer,
+            correctAnswer: question.correctAnswer,
+            questionSetName: questionSetName,
+            subject: question.subject,
+            completedDate: Date()
+        )
 
-            completedQuestions.insert(record, at: 0)
-        }
+        completedQuestions.insert(record, at: 0)
+    }
 
-        func recordIncorrectQuestion(
-            question: Question,
-            incorrectAnswer: String,
-            questionSetName: String
-        ) {
-            let record = IncorrectQuestionRecord(
-                questionText: question.questionText,
-                incorrectAnswer: incorrectAnswer,
-                correctAnswer: question.correctAnswer,
-                questionSetName: questionSetName,
-                subject: question.subject,
-                explanation: question.explanation,
-                answeredDate: Date()
-            )
+    func recordIncorrectQuestion(
+        question: Question,
+        incorrectAnswer: String,
+        questionSetName: String
+    ) {
+        let record = IncorrectQuestionRecord(
+            questionText: question.questionText,
+            incorrectAnswer: incorrectAnswer,
+            correctAnswer: question.correctAnswer,
+            questionSetName: questionSetName,
+            subject: question.subject,
+            explanation: question.explanation,
+            answeredDate: Date()
+        )
 
-            incorrectQuestions.insert(record, at: 0)
-        }
+        incorrectQuestions.insert(record, at: 0)
+    }
 }
