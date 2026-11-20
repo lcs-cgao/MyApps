@@ -54,51 +54,10 @@ struct ShopView: View {
 
     private var characterPreview: some View {
         VStack(spacing: 10) {
-            ZStack {
-                Circle()
-                    .fill(skinToneColor)
-                    .frame(width: 130, height: 130)
-
-                VStack(spacing: 8) {
-                    Text(hairSymbol)
-                        .font(.system(size: 38))
-
-                    HStack(spacing: 22) {
-                        Circle()
-                            .fill(eyeColor)
-                            .frame(width: 13, height: 13)
-                        Circle()
-                            .fill(eyeColor)
-                            .frame(width: 13, height: 13)
-                    }
-                }
-
-                if homeViewModel.character.accessories == "Hat"
-                    || homeViewModel.character.accessories == "Blue Hat"
-                    || homeViewModel.character.accessories == "Crown" {
-                    Text(hatSymbol)
-                        .font(.system(size: 42))
-                        .offset(y: -66)
-                }
-
-                if homeViewModel.character.accessories == "Glasses"
-                    || homeViewModel.character.accessories == "Round Glasses"
-                    || homeViewModel.character.accessories == "Sun Glasses" {
-                    Text("👓")
-                        .font(.system(size: 28))
-                        .offset(y: 15)
-                }
-
-                if homeViewModel.character.accessories == "Backpack"
-                    || homeViewModel.character.accessories == "Necklace" {
-                    Text(accessorySymbol)
-                        .font(.system(size: 32))
-                        .offset(x: 55, y: 45)
-                }
-            }
-
-            Text(outfitSymbol)
-                .font(.system(size: 44))
+            CharacterIllustration(
+                character: homeViewModel.character,
+                size: 130
+            )
 
             Text(homeViewModel.character.accessories)
                 .font(.caption)
@@ -179,62 +138,4 @@ struct ShopView: View {
         .padding(.vertical, 6)
     }
 
-    private var skinToneColor: Color {
-        switch homeViewModel.character.skinTone {
-        case "Light":
-            return Color(red: 1.0, green: 0.82, blue: 0.68)
-        case "Dark":
-            return Color(red: 0.38, green: 0.20, blue: 0.10)
-        default:
-            return Color(red: 0.72, green: 0.45, blue: 0.28)
-        }
-    }
-
-    private var eyeColor: Color {
-        switch homeViewModel.character.eyeColor {
-        case "Blue":
-            return .blue
-        case "Green":
-            return .green
-        default:
-            return .brown
-        }
-    }
-
-    private var hairSymbol: String {
-        if homeViewModel.character.hairstyle.contains("Ponytail") {
-            return "🎀"
-        }
-        if homeViewModel.character.hairstyle.contains("Curly") {
-            return "〰️"
-        }
-        return "🧢"
-    }
-
-    private var outfitSymbol: String {
-        if homeViewModel.character.outfit.contains("Sporty") {
-            return "🎽"
-        }
-        if homeViewModel.character.outfit.contains("Fancy") {
-            return "👔"
-        }
-        if homeViewModel.character.outfit.contains("Red Shirt") {
-            return "👕"
-        }
-        return "👕"
-    }
-
-    private var hatSymbol: String {
-        if homeViewModel.character.accessories == "Crown" {
-            return "👑"
-        }
-        return "🧢"
-    }
-
-    private var accessorySymbol: String {
-        if homeViewModel.character.accessories == "Necklace" {
-            return "📿"
-        }
-        return "🎒"
-    }
 }

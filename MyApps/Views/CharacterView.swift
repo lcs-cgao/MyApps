@@ -91,28 +91,10 @@ struct CharacterView: View {
 
     private var characterPreview: some View {
         VStack(spacing: 10) {
-            ZStack {
-                Circle()
-                    .fill(skinToneColor)
-                    .frame(width: 150, height: 150)
-
-                VStack(spacing: 8) {
-                    Text(hairSymbol)
-                        .font(.system(size: 42))
-
-                    HStack(spacing: 24) {
-                        Circle()
-                            .fill(eyeColor)
-                            .frame(width: 14, height: 14)
-                        Circle()
-                            .fill(eyeColor)
-                            .frame(width: 14, height: 14)
-                    }
-                }
-            }
-
-            Text(outfitSymbol)
-                .font(.system(size: 48))
+            CharacterIllustration(
+                character: viewModel.character,
+                size: 150
+            )
 
             Text("\(viewModel.character.hairstyle) \(viewModel.character.hairColor) hair")
             Text("\(viewModel.character.outfit) outfit • \(viewModel.character.accessories)")
@@ -162,47 +144,4 @@ struct CharacterView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 
-    private var skinToneColor: Color {
-        switch viewModel.character.skinTone {
-        case "Light":
-            return Color(red: 1.0, green: 0.82, blue: 0.68)
-        case "Dark":
-            return Color(red: 0.38, green: 0.20, blue: 0.10)
-        default:
-            return Color(red: 0.72, green: 0.45, blue: 0.28)
-        }
-    }
-
-    private var eyeColor: Color {
-        switch viewModel.character.eyeColor {
-        case "Blue":
-            return .blue
-        case "Green":
-            return .green
-        default:
-            return .brown
-        }
-    }
-
-    private var hairSymbol: String {
-        switch viewModel.character.hairstyle {
-        case "Curly":
-            return "〰️"
-        case "Ponytail":
-            return "🎀"
-        default:
-            return "🧢"
-        }
-    }
-
-    private var outfitSymbol: String {
-        switch viewModel.character.outfit {
-        case "Sporty":
-            return "⚽️"
-        case "Fancy":
-            return "👗"
-        default:
-            return "👕"
-        }
-    }
 }
