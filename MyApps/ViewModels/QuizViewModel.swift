@@ -2,6 +2,9 @@
 //  QuizViewModel.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: quiz answer and completion logic.
+//  The quiz rules and feedback behavior are my own.
 
 import Observation
 

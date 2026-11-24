@@ -2,6 +2,9 @@
 //  ShopView.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was updated using GitHub Copilot: procedure-call comment and UI labels.
+//  The shop layout and buying interactions are my own.
 
 import SwiftUI
 import Observation
@@ -122,6 +125,8 @@ struct ShopView: View {
                         ? "Equipped"
                         : "Equip"
                 ) {
+                    // PROCEDURE CALL: The shop screen uses equipItem
+                    // to equip the selected item during real app use.
                     homeViewModel.shopViewModel.equipItem(item)
                 }
                 .buttonStyle(.borderedProminent)

@@ -2,6 +2,9 @@
 //  ShopViewModel.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was updated using GitHub Copilot: shop array and equip procedure comments.
+//  The shop state, purchasing, and equipping logic are my own.
 
 import Foundation
 import Observation
@@ -20,6 +23,8 @@ final class ShopViewModel {
 
     // MARK: - Shop Items
 
+    // LIST: This array stores every shop item used by the app.
+    // It makes the shop easier to build, update, and display.
     let availableItems: [ShopItem] = [
         ShopItem(name: "Red Shirt", trophyPrice: 2, category: .shirt, symbol: "👕"),
         ShopItem(name: "Sporty Shirt", trophyPrice: 3, category: .shirt, symbol: "🎽"),
@@ -74,6 +79,8 @@ final class ShopViewModel {
 
     // MARK: - Equipping
 
+    // PROCEDURE: equipItem uses the item parameter to change which item
+    // is equipped. It uses sequencing, an if selection, and a for loop.
     func equipItem(_ item: ShopItem) {
         if purchasedItemIDs.contains(item.id) == false {
             purchaseMessage = "Purchase \(item.name) before equipping it."

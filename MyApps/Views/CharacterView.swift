@@ -2,6 +2,9 @@
 //  CharacterView.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: character customization interface.
+//  The character selections and Continue behavior are my own.
 
 import SwiftUI
 

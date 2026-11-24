@@ -2,6 +2,9 @@
 //  History.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: quiz history record structures.
+//  The record fields and quiz tracking logic are my own.
 
 import Foundation
 

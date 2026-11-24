@@ -2,6 +2,9 @@
 //  CompletionView.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: quiz completion screen.
+//  The completion message and trophy presentation are my own.
 
 import SwiftUI
 

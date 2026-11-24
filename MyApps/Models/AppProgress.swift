@@ -2,6 +2,9 @@
 //  AppProgress.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was updated using GitHub Copilot: app progress persistence fields.
+//  The app's own progress properties and saved-data structure are defined by GaoZiHan.
 
 import Foundation
 

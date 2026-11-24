@@ -2,6 +2,9 @@
 //  HomeView.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: main adventure screen structure.
+//  The app navigation and learning screen layout are my own.
 
 import SwiftUI
 

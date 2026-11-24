@@ -2,6 +2,9 @@
 //  LocalDataStore.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was updated using GitHub Copilot: reset-progress persistence support.
+//  The existing save and load approach is my own.
 
 import Foundation
 
@@ -34,5 +37,9 @@ final class LocalDataStore {
         } catch {
             print("Unable to save app progress: \(error.localizedDescription)")
         }
+    }
+
+    func resetProgress() {
+        defaults.removeObject(forKey: progressKey)
     }
 }

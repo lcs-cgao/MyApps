@@ -2,6 +2,9 @@
 //  HistoryView.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: quiz history interface.
+//  The history sections and record presentation are my own.
 
 import SwiftUI
 

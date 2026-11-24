@@ -2,6 +2,9 @@
 //  QuestionSet.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: question-set progression structure.
+//  The question sets and their content are my own.
 
 import Foundation
 

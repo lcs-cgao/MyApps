@@ -2,6 +2,9 @@
 //  ShopItem.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: shop item and category structures.
+//  The shop item properties and categories are my own.
 
 import Foundation
 

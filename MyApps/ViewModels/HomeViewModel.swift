@@ -2,6 +2,9 @@
 //  HomeViewModel.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was updated using GitHub Copilot: project comments and saved progress support.
+//  The progress, trophy, and completion logic are my own.
 
 import Foundation
 import Observation

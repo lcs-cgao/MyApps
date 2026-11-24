@@ -2,6 +2,9 @@
 //  CharacterViewModel.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: character selection ViewModel setup.
+//  The character choices and selection procedures are my own.
 
 import Observation
 

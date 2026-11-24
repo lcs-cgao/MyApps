@@ -2,6 +2,9 @@
 //  CharacterIllustration.swift
 //  MyApps
 //
+//  Created by GaoZiHan on 2026-11-24.
+//  This code was generated using GitHub Copilot: SwiftUI character illustration.
+//  The character appearance and design choices are my own.
 
 import SwiftUI
 
